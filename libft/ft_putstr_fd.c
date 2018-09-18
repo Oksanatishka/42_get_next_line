@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obibik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:55:13 by obibik            #+#    #+#             */
-/*   Updated: 2018/09/18 13:55:16 by obibik           ###   ########.fr       */
+/*   Created: 2018/08/22 16:57:23 by obibik            #+#    #+#             */
+/*   Updated: 2018/08/22 16:57:27 by obibik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft/libft.h"
-# define BUFF_SIZE 32
-# define FDS 65535
+/*
+** Outputs the string s to the file descriptor fd.
+** Param. #1 The string to output.
+** Param. #2 The file descriptor.
+** Return value None.
+** Libc functions write(2).
+*/
 
-int		get_next_line(const int fd, char **line);
+#include "libft.h"
 
-#endif
+void	ft_putstr_fd(char const *s, int fd)
+{
+	write(fd, s, ft_strlen(s));
+}
+
+/*
+** int main () {
+**     char letter[20] = "Life if good.";
+**     ft_putstr_fd(letter, 1);
+**     return(0);
+** }
+*/

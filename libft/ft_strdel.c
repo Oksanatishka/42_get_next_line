@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obibik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:55:13 by obibik            #+#    #+#             */
-/*   Updated: 2018/09/18 13:55:16 by obibik           ###   ########.fr       */
+/*   Created: 2018/08/22 16:57:55 by obibik            #+#    #+#             */
+/*   Updated: 2018/08/22 16:57:58 by obibik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft/libft.h"
-# define BUFF_SIZE 32
-# define FDS 65535
+/*
+** Takes as a parameter the address of a string that need to be
+** freed with free(3), then sets its pointer to NULL.
+** Param. #1 The string’s address that needs to be freed and its pointer set
+** to NULL.
+** Return value None.
+** Libc functions Free(3)
+*/
 
-int		get_next_line(const int fd, char **line);
+#include "libft.h"
 
-#endif
+void	ft_strdel(char **as)
+{
+	if (as)
+	{
+		free(*as);
+		*as = NULL;
+	}
+}

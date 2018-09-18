@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obibik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:55:13 by obibik            #+#    #+#             */
-/*   Updated: 2018/09/18 13:55:16 by obibik           ###   ########.fr       */
+/*   Created: 2018/08/22 16:55:36 by obibik            #+#    #+#             */
+/*   Updated: 2018/08/22 16:55:38 by obibik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft/libft.h"
-# define BUFF_SIZE 32
-# define FDS 65535
+/*
+** Outputs the character c to the standard output.
+** Param. #1 The character to output.
+** Return value None.
+** Libc functions write(2).
+*/
 
-int		get_next_line(const int fd, char **line);
+#include "libft.h"
 
-#endif
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+/*
+** int main () {
+**     char letter = 'A';
+**     ft_putchar(letter);
+**     return(0);
+** }
+*/

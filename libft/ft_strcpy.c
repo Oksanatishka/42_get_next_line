@@ -1,21 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obibik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:55:13 by obibik            #+#    #+#             */
-/*   Updated: 2018/09/18 13:55:16 by obibik           ###   ########.fr       */
+/*   Created: 2018/08/14 17:30:26 by obibik            #+#    #+#             */
+/*   Updated: 2018/08/14 17:30:29 by obibik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft/libft.h"
-# define BUFF_SIZE 32
-# define FDS 65535
+/*
+** stpcpy, stpncpy, strcpy, strncpy -- copy strings
+*/
 
-int		get_next_line(const int fd, char **line);
+#include "libft.h"
 
-#endif
+char	*ft_strcpy(char *dst, const char *src)
+{
+	int		i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = src[i];
+	return (dst);
+}
+
+/*
+** int main ()
+** {
+**     char example[50];
+**
+**     ft_strcpy(example, "Life is good!");
+**     printf("%s\n", example);
+**
+**    return(0);
+** }
+*/

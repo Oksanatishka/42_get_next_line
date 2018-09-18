@@ -1,21 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_cntwrd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obibik <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/18 13:55:13 by obibik            #+#    #+#             */
-/*   Updated: 2018/09/18 13:55:16 by obibik           ###   ########.fr       */
+/*   Created: 2018/08/28 12:41:01 by obibik            #+#    #+#             */
+/*   Updated: 2018/08/28 12:41:28 by obibik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include "libft/libft.h"
-# define BUFF_SIZE 32
-# define FDS 65535
+/*
+** Extra function for ft_strsplit.c
+*/
 
-int		get_next_line(const int fd, char **line);
+#include "libft.h"
 
-#endif
+int	ft_cntwrd(char const *s, char c)
+{
+	unsigned int	i;
+	int				cntr;
+
+	i = 0;
+	cntr = 0;
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i] != '\0')
+			cntr++;
+		while (s[i] && (s[i] != c))
+			i++;
+	}
+	return (cntr);
+}

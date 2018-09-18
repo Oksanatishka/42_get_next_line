@@ -1,12 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obibik <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/18 13:55:02 by obibik            #+#    #+#             */
+/*   Updated: 2018/09/18 13:55:04 by obibik           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-// strchr -- locate character in string
-// strsub -- allocates and returns a “fresh” substring from the string given as argument.
-// strdup -- save a copy of a string
-// strnew -- Allocates (with malloc(3)) and returns a “fresh” string ending with ’\0’.
-// memalloc -- Allocates (with malloc(3)) and returns a “fresh” memory area.
+/*
+** find next line with \n in the end from buf
+** and save it to the line argument
+** 1) move buf until \n is found, when found - return pointer to that character
+** 2) if \n was found in the buf
+** 3) add end of line to it, now buf has end of line charkter after \n
+** 4) cut string from buf starting from 0 to length of new_line
+** after that buf will be equal to our new lin
+** 5) copy to buf everything what goes after \n + 1 (end of line)
+** basically buf will be equal to content in the file except first line
+** 6) if \n was not found - save everything to line and return
+**
+**
+** strchr -- locate character in string
+** strsub -- allocates and returns a “fresh” substring from the string given
+** 			 as argument.
+** strdup -- save a copy of a string
+** strnew -- Allocates and returns a “fresh” string ending with ’\0’.
+** memalloc -- Allocates (with malloc(3)) and returns a “fresh” memory area.
+*/
 
-static	int	find_new_line(int fd, char **buf, char **line)
+static	int	find_nl(int fd, char **buf, char **line)
 {
 	char		*new_line;
 	char		*tmp;
@@ -42,6 +69,21 @@ static	int	find_new_line(int fd, char **buf, char **line)
 ** and force the positive ret value into a one (1), using the RET_VALUE() macro.
 ** This answer form SO helped me visualize the stack and heap in a better way:
 ** http://stackoverflow.com/a/1213360
+**
+**
+** read from file by 32 characters to prevent memory issues
+** 1)create new buf with 32 length
+** 2) read from file by 32 characters until nothing is left in the file
+** 3) since fd is unique number (file descriptor) - we are going to allowcate
+** for that file only string by fd index
+** in case there are different files to read from - each file will be saving
+** content to separate string by index [fd]
+** if nothig found by fd index
+** 4) allocate memory with 32 sizw
+** 5) put first 32 bytes
+** 6) printf("ft_read, ft_strcpy line[fd] = %s, buf = %s\n\n", line[fd], buf);
+** 7) printf("ft_read, else tmp = %s\n\n", tmp);
+** 8) printf("ft_read, else line[fd] = %s, buf = %s\n\n", line[fd], buf);
 */
 
 static	int	ft_read(int fd, char **line)
@@ -94,10 +136,17 @@ static	int	ft_read(int fd, char **line)
 ** A good read about file descriptors:
 ** http://www.bottomupcs.com/file_descriptors.xhtml
 **
-** Return: 	
+** Return:
 ** -1 in case of an ERROR
 ** 1 in case of SUCCESS
 ** 0 for the end of file
+**
+**
+** in case we need to open many files so we have enough indexes in buf
+** for example
+** buf[3] = content of file1
+** buf[4] = content of file2
+** buf[6] = content of file3
 */
 
 int			get_next_line(const int fd, char **line)
@@ -107,7 +156,7 @@ int			get_next_line(const int fd, char **line)
 	if (!line || fd < 0 || BUFF_SIZE < 0 || (ft_read(fd, &buf[fd]) < 0) ||
 fd > FDS)
 		return (-1);
-	if (find_new_line(fd, &buf[fd], line) == 1)
+	if (find_nl(fd, &buf[fd], line) == 1)
 		return (1);
 	return (0);
 }
