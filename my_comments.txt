@@ -1,0 +1,51 @@
+The function will prototyped as:
+int	get_next_line(const int fd, char **line)
+- fd is used to read
+- Line is an address of a pointer that will be used to save the line read from the fd
+
+It will return:
+1 if the line has been read
+0 when the reading has been completed
+-1 for an error
+
+It must return its result without a \n.
+Calling get_next_line in a loop will allow you to read the text available
+on a fd one line at a time until the end (no matter the size of the text or a line).
+
+\
+
+
+https://kevinat42.wordpress.com/2017/03/21/get-next-line-project-outline/
+
+
+Usage:
+
+char *line;
+
+// To get a single line
+get_next_line(fd, &line);
+...
+ft_strdel(&line); // You should free after you're done using your line
+
+// To read a whole file
+while (get_next_line(fd, &line))
+{
+	// process the line here, here we'll just output it
+	ft_putstr(line);
+	
+	// free the line to avoid leaking memory
+	ft_strdel(&line);
+}
+
+// GNL will automatically free appropriately whenever it reaches EOF.
+
+
+main.c
+========================
+while (1) indicates an always TRUE condition so any loop with having this statement will run forever. This is also known as infinite loop.
+
+while (1) // Always TRUE.
+{
+ 
+}
+-------------
