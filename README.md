@@ -17,6 +17,7 @@ cd get_next_line
 make -C libft/
 3) Build the executable: 
 gcc -Wall -Wextra -Werror -I./libft/includes/ -L./libft -lft -o gnl get_next_line.c main.c
+
 -I tells the compiler where your library header files are. ./libft/includes/ in this case
 -L tells it where your library resides. ./libft here
 -l takes the name of your library. This is the set of characters that come after lib in your library name.
